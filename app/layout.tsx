@@ -6,6 +6,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
+import { Header } from "@/components/header";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -40,6 +41,7 @@ export default function RootLayout({
         >
           <AppSidebar variant="inset" />
           <SidebarInset>
+            <Header />
             <main className="flex flex-1 flex-col">
               <div className="@container/main flex flex-1 flex-col gap-2">
                 {children}
