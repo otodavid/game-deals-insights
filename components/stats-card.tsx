@@ -1,0 +1,34 @@
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { CircleArrowOutUpRight } from "lucide-react";
+
+interface StatsCardProps {
+  id: number;
+  title: string;
+  value: string | number | undefined;
+  url: string;
+  description?: string;
+}
+
+export default function StatsCard(stats: StatsCardProps) {
+  const formattedValue =
+    typeof stats.value === "string" ? `${stats.value}%` : stats.value;
+  return (
+    <Card>
+      <div>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium capitalize">
+            {stats.title}
+          </CardTitle>
+          <CircleArrowOutUpRight size={"1rem"} />
+        </CardHeader>
+        <CardContent>
+          <p className="text-4xl font-bold">{formattedValue}</p>
+          <p className="text-xs text-muted-foreground capitalize mt-2">
+            {stats.description}
+          </p>
+        </CardContent>
+      </div>
+    </Card>
+  );
+}
