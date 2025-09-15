@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -24,10 +29,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} ${inter.variable} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} ${inter.variable} antialiased`}>
+        <SidebarProvider
+          style={
+            {
+              "--sidebar-width": "calc(var(--spacing) * 72)",
+              "--header-height": "calc(var(--spacing) * 12)",
+            } as React.CSSProperties
+          }
+        >
+          <AppSidebar variant="inset" />
+          <SidebarInset>
+            <main className="flex flex-1 flex-col">
+              <div className="@container/main flex flex-1 flex-col gap-2">
+                {children}
+              </div>
+            </main>
+          </SidebarInset>
+        </SidebarProvider>
       </body>
     </html>
   );
