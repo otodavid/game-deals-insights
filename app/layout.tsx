@@ -42,7 +42,7 @@ export default function RootLayout({
           <AppSidebar variant="inset" />
           <SidebarInset>
             <Header />
-            <main className="flex flex-1 flex-col">
+            <main className="flex flex-1 flex-col bg-muted">
               <div className="@container/main flex flex-1 flex-col gap-2">
                 {children}
               </div>
