@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
@@ -10,7 +9,10 @@ export default function GameCard(game: ITADGame) {
       <div className="relative isolate aspect-square">
         <Image
           src={
-            game.assets.boxart ?? game.assets.banner600 ?? game.assets.banner400
+            game.assets.boxart ??
+            game.assets.banner600 ??
+            game.assets.banner400 ??
+            "/images/noImage.png"
           }
           alt={`${game.title} cover art`}
           fill={true}
@@ -25,7 +27,7 @@ export default function GameCard(game: ITADGame) {
           </CardHeader>
           <CardContent className="flex justify-between mt-2 px-0">
             <div className="space-x-2">
-              <Badge className="bg-chart-2 px-2.5 py-1">{game.deal.cut}%</Badge>
+              <Badge className="bg-chart-2 px-2.5 py-1">{game.deal.cut ?? 0}%</Badge>
               <span>&#36;{game.deal.price.amount}</span>
             </div>
             <span>{game.deal.shop.name}</span>
