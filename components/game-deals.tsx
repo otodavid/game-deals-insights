@@ -1,120 +1,110 @@
-import { Search } from "lucide-react";
-import { Card, CardContent, CardHeader } from "./ui/card";
-import { Input } from "./ui/input";
-import GameCard from "./game-card";
+"use client";
+
+import { useState, useMemo } from "react";
+import HeroSkeleton from "./hero-skeleton";
+import type { ITADDealsResponse } from "@/types/api-responses";
+import { useGameDeals } from "@/lib/queries/useGameDeals";
+import { useGameSearch } from "@/lib/queries/useGameSearch";
+import { DEFAULT_DEALS_PARAMS } from "@/lib/constants";
+import GamesGridView from "./games-grid-view";
+import GamesTableView from "./games-table-view";
+import { Button } from "./ui/button";
+import ViewToggle from "./view-toggle";
+import SearchBox from "./search-box";
 
 export default function GameDeals() {
-  const gamesData = [
-    {
-      id: 1,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 2,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 3,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 4,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 5,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 6,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 7,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 8,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-    {
-      id: 9,
-      title: "GTA VI",
-      regularPrice: 19.99,
-      dealPrice: 12.99,
-      discount: 20,
-      store: "Humble",
-    },
-  ];
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+  const [view, setView] = useState<"grid" | "list">("grid");
+  const [pageIndex, setPageIndex] = useState(0);
+  const pageSize = 10;
+
+  // Fetch default top deals
+  const {
+    data: dealsData,
+    isLoading: isDealsLoading,
+    isError: isDealsError,
+  } = useGameDeals({
+    ...DEFAULT_DEALS_PARAMS,
+    limit: 10,
+    offset: pageIndex * pageSize,
+  });
+
+  // Fetch search results
+  const {
+    data: searchResults,
+    isLoading: isSearchLoading,
+    isError: isSearchError,
+  } = useGameSearch({ title: query, results: 20 });
+
+  // Determine which data to use
+  const isSearching = query.length > 0;
+  const games: ITADDealsResponse | undefined = useMemo(() => {
+    if (isSearching) {
+      if (!searchResults) return undefined;
+      return {
+        list: searchResults,
+        hasMore: false,
+        nextOffset: 0,
+      };
+    } else {
+      return dealsData;
+    }
+  }, [dealsData, isSearching, searchResults]);
+
+  const isLoading = isSearching ? isSearchLoading : isDealsLoading;
+  const isError = isSearching ? isSearchError : isDealsError;
+
   return (
     <div>
-      <h3>Games on Sale</h3>
-      <Card>
-        <CardHeader>
-          <div className="relative">
-            <label htmlFor="game-search" className="sr-only">
-              Search for a game
-            </label>
-            <Input
-              id="game-search"
-              type="search"
-              className="rounded-md pl-8"
-              placeholder="Search for any game..."
-            />
-            <Search
-              className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
-              size={"16px"}
-              aria-hidden={true}
-            />
-          </div>
-        </CardHeader>
+      {/* Search + View Toggle */}
+      <div className="flex justify-between items-center mb-4 gap-4">
+        <SearchBox search={search} setQuery={setQuery} setSearch={setSearch} />
 
-        <CardContent className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-          {gamesData.map((game) => (
-            <GameCard
-              key={game.id}
-              id={game.id}
-              dealPrice={game.dealPrice}
-              discount={game.discount}
-              regularPrice={game.regularPrice}
-              store={game.store}
-              title={game.title}
-            />
+        <ViewToggle setView={setView} view={view} />
+      </div>
+
+      {isLoading && (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+          {[...Array(pageSize)].map((_, i) => (
+            <HeroSkeleton key={i} />
           ))}
-        </CardContent>
-      </Card>
+        </div>
+      )}
+
+      {/* Error */}
+      {isError && <div className="text-red-500">Failed to load games.</div>}
+
+      {/* Empty */}
+      {!isLoading && games?.list.length === 0 && <div>No games found.</div>}
+
+      {/* Content */}
+      {!isLoading && games?.list && games.list.length > 0 && (
+        <>
+          {view === "grid" ? (
+            <GamesGridView games={games} />
+          ) : (
+            <GamesTableView games={games} />
+          )}
+        </>
+      )}
+
+      <div className="flex justify-center gap-2 mt-4">
+        <Button
+          onClick={() => setPageIndex(pageIndex - 1)}
+          disabled={pageIndex === 0}
+          variant={"default"}
+        >
+          Prev
+        </Button>
+        <Button
+          onClick={() => setPageIndex(pageIndex + 1)}
+          disabled={!games?.hasMore}
+          variant={"default"}
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }
