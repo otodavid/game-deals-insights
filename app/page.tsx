@@ -36,23 +36,26 @@ export default function Home() {
   ];
 
   return (
-    <div>
-      <HeroSection />
-
-      <div className="px-3 space-y-8 mt-8">
+    <div className="px-3 space-y-8 mt-8">
+      <div className="grid grid-cols-1 gap-8 2xl:grid-cols-[1fr_20rem] md:gap-8 justify-between">
+        <HeroSection />
         <PriceAlert />
+      </div>
 
-        {statsData.map((stats) => (
-          <div key={stats.id}>
-            <StatsCard
-              id={stats.id}
-              title={stats.title}
-              url={stats.url}
-              value={stats.value}
-              description={stats.description}
-            />
-          </div>
-        ))}
+      <div className="mb-8">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 mb-8">
+          {statsData.map((stats) => (
+            <div key={stats.id}>
+              <StatsCard
+                id={stats.id}
+                title={stats.title}
+                url={stats.url}
+                value={stats.value}
+                description={stats.description}
+              />
+            </div>
+          ))}
+        </div>
 
         <GameDeals />
       </div>

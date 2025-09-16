@@ -3,7 +3,7 @@ import type { ITADDealsResponse } from "@/types/api-responses";
 
 export default function GamesGridView({ games }: { games: ITADDealsResponse }) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4">
       {games?.list.map((game) => (
         <GameCard
           key={game.id}

@@ -25,7 +25,7 @@ export default function HeroSection() {
   const gameDeal: ITADGame = data.list[0];
 
   return (
-    <div className="w-full aspect-video relative rounded-md overflow-hidden isolate">
+    <div className="w-full aspect-video relative rounded-md overflow-hidden isolate max-h-96">
       <Image
         src={gameDeal.assets.boxart}
         alt="Deal of the day image"
@@ -42,7 +42,7 @@ export default function HeroSection() {
 
         <div className="text-secondary py-8 flex flex-col gap-2">
           <Badge className="bg-chart-2">{gameDeal.deal.cut} off</Badge>
-          <h2 className="text-4xl font-semibold">{gameDeal.title}</h2>
+          <h2 className="text-4xl font-semibold md:text-6xl">{gameDeal.title}</h2>
           <div className="flex gap-2">
             <span className="line-through text-secondary/70">
               &#36;{gameDeal.deal.regular.amount}

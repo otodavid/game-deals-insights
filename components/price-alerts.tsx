@@ -45,7 +45,7 @@ export default function PriceAlert() {
           <Plus />
         </Button>
       </div>
-      <div className="space-y-4">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
         {data.map((game) => (
           <Card key={game.id} className="p-4">
             <div className="grid grid-cols-[6rem_1fr]">
@@ -58,8 +58,8 @@ export default function PriceAlert() {
                 />
               </div>
 
-              <div>
-                <CardHeader className="px-4 ">
+              <div className="ml-4">
+                <CardHeader className="px-0">
                   <CardTitle className="text-lg font-semibold">
                     {game.title}
                   </CardTitle>
@@ -67,7 +67,7 @@ export default function PriceAlert() {
                     Price alert for {game.title}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="px-4">
+                <CardContent className="px-0">
                   <div className="flex justify-between">
                     <div className="flex flex-col">
                       <span className="text-sm">Target Price</span>

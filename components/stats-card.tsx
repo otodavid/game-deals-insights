@@ -14,15 +14,15 @@ export default function StatsCard(stats: StatsCardProps) {
   const formattedValue =
     typeof stats.value === "string" ? `${stats.value}%` : stats.value;
   return (
-    <Card>
+    <Card className="px-4">
       <div>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-0">
           <CardTitle className="text-sm font-medium capitalize">
             {stats.title}
           </CardTitle>
           <CircleArrowOutUpRight size={"1rem"} />
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-0">
           <p className="text-4xl font-bold">{formattedValue}</p>
           <p className="text-xs text-muted-foreground capitalize mt-2">
             {stats.description}
