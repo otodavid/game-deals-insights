@@ -1,14 +1,18 @@
 "use client";
 
-import { useGetShops } from "@/lib/queries/useGetShops";
 import StatsCardSkeleton from "./stats-card-skeleton";
 import { DEFAULT_DEALS_PARAMS, DEFAULT_SHOPS } from "@/lib/constants";
 import StatsCard from "./stats-card";
 import { useGameDeals } from "@/lib/queries/useGameDeals";
-import { ITADGame } from "@/types/api-responses";
+import { ITADGame, ITADShopDetail } from "@/types/api-responses";
 
-export default function StatsCardList() {
-  const { data, isLoading } = useGetShops({ country: "CA" });
+export default function StatsCardList({
+  shops,
+  isLoadingShops,
+}: {
+  shops: ITADShopDetail[] | undefined;
+  isLoadingShops: boolean;
+}) {
   const { data: hotGameList } = useGameDeals({
     ...DEFAULT_DEALS_PARAMS,
     limit: 60,
@@ -20,13 +24,18 @@ export default function StatsCardList() {
     sort: "-cut",
   });
 
-  if (isLoading) {
-    return <StatsCardSkeleton />;
+  if (isLoadingShops) {
+    return (
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 mb-8">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <StatsCardSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
 
-  const filteredShops = data?.filter(
-    (store) => DEFAULT_SHOPS[Number(store.id)]
-  );
+  const filteredShops =
+    shops && shops?.filter((store) => DEFAULT_SHOPS[Number(store.id)]);
 
   const totalActiveDeals = filteredShops?.reduce(
     (prev, store) => prev + store.deals,
