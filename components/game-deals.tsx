@@ -12,7 +12,7 @@ import { Button } from "./ui/button";
 import ViewToggle from "./view-toggle";
 import SearchBox from "./search-box";
 import { TableSkeleton } from "./table-skeleton";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import GameCardSkeleton from "./game-card-skeleton";
 
 export default function GameDeals() {
@@ -60,7 +60,9 @@ export default function GameDeals() {
 
   return (
     <Card>
-      {/* Search + View Toggle */}
+      <CardHeader>
+        <CardTitle>Games on Sale</CardTitle>
+      </CardHeader>
       <CardContent>
         <div className="flex justify-between items-center mb-4 gap-4">
           <SearchBox

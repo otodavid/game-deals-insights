@@ -7,7 +7,7 @@ import { getGameImageSrc } from "@/lib/utils";
 export default function GameCard({ game }: { game: ITADGame }) {
   return (
     <Card className="p-0 rounded-md overflow-hidden">
-      <div className="relative isolate aspect-square">
+      <div className="relative isolate h-80">
         <Image
           src={getGameImageSrc(game.assets)}
           alt={`${game.title} cover art`}
@@ -17,7 +17,7 @@ export default function GameCard({ game }: { game: ITADGame }) {
 
         <div className="text-white  z-10 absolute bottom-0 left-0 right-0 p-4 bg-primary/60 backdrop-blur-sm">
           <CardHeader className="px-0">
-            <CardTitle className="text-2xl font-semibold capitalize">
+            <CardTitle className="text-lg font-semibold capitalize">
               {game.title}
             </CardTitle>
           </CardHeader>
