@@ -41,9 +41,14 @@ export interface ITADPriceHistory {
   y1?: ITADPrice;
   m3?: ITADPrice;
 }
+
 export interface ITADDealDetail {
-  id: string;
-  historyLow: ITADPriceHistory;
+  shop: ITADShop,
   expiry: string | null;
   url: string;
+}
+export interface ITADGameDealDetail {
+  id: string;
+  historyLow: ITADPriceHistory;
+  deals: ITADDealDetail[]
 }
