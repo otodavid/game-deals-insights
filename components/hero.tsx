@@ -26,24 +26,26 @@ export default function HeroSection() {
   const gameDeal: ITADGame = data.list[0];
 
   return (
-    <div className="w-full aspect-video relative rounded-md overflow-hidden isolate max-h-96">
+    <div className="w-full h-full relative rounded-md overflow-hidden isolate">
       <Image
         src={getGameImageSrc(gameDeal.assets)}
         alt="Deal of the day image"
         fill={true}
-        className="object-cover aspect-video -z-10"
+        className="object-cover -z-10"
       />
-      <div className="bg-gradient-to-br from-primary/90 to-primary/40 w-full h-full backdrop-blur-[2px] p-4">
-        <div className="flex justify-end">
-          <Badge className="mr-0 ml-auto bg-accent text-accent-foreground">
+      <div className="bg-gradient-to-br md:bg-gradient-to-r from-primary/90 to-primary/40 w-full h-full min-h-80 p-4 relative">
+        <div className="flex justify-end absolute top-5 right-5">
+          <Badge className="mr-0 ml-auto bg-primary text-primary-foreground">
             <Flame />
             Deal of the day
           </Badge>
         </div>
 
-        <div className="text-secondary py-8 flex flex-col gap-2">
+        <div className="text-secondary px-4  flex flex-col gap-2 h-full w-full justify-center">
           <Badge className="bg-chart-2">{gameDeal.deal.cut} off</Badge>
-          <h2 className="text-4xl font-semibold md:text-6xl">{gameDeal.title}</h2>
+          <h2 className="text-xl md:text-2xl xl:text-4xl 2xl:text-5xl font-semibold">
+            {gameDeal.title}
+          </h2>
           <div className="flex gap-2">
             <span className="line-through text-secondary/70">
               &#36;{gameDeal.deal.regular.amount}
