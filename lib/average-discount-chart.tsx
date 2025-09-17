@@ -18,6 +18,7 @@ import {
 import { useGameDeals } from "./queries/useGameDeals";
 import { DEFAULT_DEALS_PARAMS } from "./constants";
 import { useMemo } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function AverageDiscountChart() {
   const steamDeals = useGameDeals({
@@ -67,14 +68,14 @@ export function AverageDiscountChart() {
 
     return sources.map(({ name, query }) => {
       const games = query.data?.list ?? [];
-      const avg =
+      const average =
         games.length > 0
-          ? games.reduce((sum, g) => sum + g.deal.cut, 0) / games.length
+          ? games.reduce((sum, game) => sum + game.deal.cut, 0) / games.length
           : 0;
 
       return {
         store: name,
-        avgDiscount: parseFloat(avg.toFixed(2)),
+        avgDiscount: parseFloat(average.toFixed(2)),
       };
     });
   }, [steamDeals, epicDeals, gogDeals, humbleDeals, ubisoftDeals]);
@@ -86,6 +87,13 @@ export function AverageDiscountChart() {
     },
   };
 
+  const isLoading =
+    steamDeals.isLoading ||
+    epicDeals.isLoading ||
+    gogDeals.isLoading ||
+    humbleDeals.isLoading ||
+    ubisoftDeals.isLoading;
+
   return (
     <Card>
       <CardHeader>
@@ -93,33 +101,38 @@ export function AverageDiscountChart() {
         <CardDescription>Based on top 50 top rated games</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData} margin={{ top: 20 }}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="store"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent />}
-            />
-            <Bar dataKey="avgDiscount" fill="var(--chart-2)" radius={8}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground"
-                fontSize={12}
-                formatter={(value: number) => `${value}%`}
+        {isLoading ? (
+          <div className="flex gap-4 mt-4 items-center justify-between">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="h-44 w-1/5 rounded-md" />
+            ))}
+          </div>
+        ) : (
+          <ChartContainer config={chartConfig}>
+            <BarChart accessibilityLayer data={chartData} margin={{ top: 20 }}>
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="store"
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
               />
-            </Bar>
-          </BarChart>
-        </ChartContainer>
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Bar dataKey="avgDiscount" fill="var(--chart-2)" radius={8}>
+                <LabelList
+                  position="top"
+                  offset={12}
+                  className="fill-foreground"
+                  fontSize={12}
+                  formatter={(value: number) => `${value}%`}
+                />
+              </Bar>
+            </BarChart>
+          </ChartContainer>
+        )}
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="text-muted-foreground leading-none">
+        <div className="text-muted-foreground leading-none text-center">
           Based on average discount across major stores
         </div>
       </CardFooter>
