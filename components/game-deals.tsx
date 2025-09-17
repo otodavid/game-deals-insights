@@ -13,6 +13,7 @@ import ViewToggle from "./view-toggle";
 import SearchBox from "./search-box";
 import { TableSkeleton } from "./table-skeleton";
 import { Card, CardContent } from "./ui/card";
+import GameCardSkeleton from "./game-card-skeleton";
 
 export default function GameDeals() {
   const [search, setSearch] = useState("");
@@ -37,7 +38,7 @@ export default function GameDeals() {
     data: searchResults,
     isLoading: isSearchLoading,
     isError: isSearchError,
-  } = useGameSearch({ title: query, results: 20 });
+  } = useGameSearch({ title: query, results: 10 });
 
   // Determine which data to use
   const isSearching = query.length > 0;
@@ -74,7 +75,7 @@ export default function GameDeals() {
           (view === "grid" ? (
             <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
               {[...Array(pageSize)].map((_, i) => (
-                <HeroSkeleton key={i} />
+                <GameCardSkeleton key={i} />
               ))}
             </div>
           ) : (
