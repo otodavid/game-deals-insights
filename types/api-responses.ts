@@ -43,12 +43,18 @@ export interface ITADPriceHistory {
 }
 
 export interface ITADDealDetail {
-  shop: ITADShop,
+  shop: ITADShop;
   expiry: string | null;
   url: string;
 }
 export interface ITADGameDealDetail {
   id: string;
   historyLow: ITADPriceHistory;
-  deals: ITADDealDetail[]
+  deals: ITADDealDetail[];
+}
+
+export interface ITADShopDetail {
+  id: number;
+  name: string;
+  deals: number;
 }
