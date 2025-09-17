@@ -12,6 +12,6 @@ export function useGameDeals(params: {
 }) {
   return useQuery({
     queryKey: ["deals", params],
-    queryFn: () => apiFetch<ITADDealsResponse>("deals/v2", params),
+    queryFn: () => apiFetch<ITADDealsResponse>("deals/v2", { params }),
   });
 }

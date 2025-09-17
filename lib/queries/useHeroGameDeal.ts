@@ -8,8 +8,8 @@ export function useHeroGameDeal() {
     queryKey: ["deals"],
     queryFn: () =>
       apiFetch<ITADDealsResponse>("deals/v2", {
-        ...DEFAULT_DEALS_PARAMS,
-        sort: "-cut",
+        params:{...DEFAULT_DEALS_PARAMS,
+        sort: "-cut",}
       }),
   });
 }
