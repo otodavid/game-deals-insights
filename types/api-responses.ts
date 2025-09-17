@@ -35,3 +35,15 @@ export interface ITADDealsResponse {
   hasMore: boolean;
   nextOffset: number;
 }
+
+export interface ITADPriceHistory {
+  all?: ITADPrice;
+  y1?: ITADPrice;
+  m3?: ITADPrice;
+}
+export interface ITADDealDetail {
+  id: string;
+  historyLow: ITADPriceHistory;
+  expiry: string | null;
+  url: string;
+}
