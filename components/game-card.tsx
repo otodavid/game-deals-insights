@@ -2,18 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { ITADGame } from "@/types/api-responses";
+import { getGameImageSrc } from "@/lib/utils";
 
 export default function GameCard({ game }: { game: ITADGame }) {
   return (
     <Card className="p-0 rounded-md overflow-hidden">
       <div className="relative isolate aspect-square">
         <Image
-          src={
-            game.assets.boxart ??
-            game.assets.banner600 ??
-            game.assets.banner400 ??
-            "/images/noImage.png"
-          }
+          src={getGameImageSrc(game.assets)}
           alt={`${game.title} cover art`}
           fill={true}
           className="object-cover -z-10"

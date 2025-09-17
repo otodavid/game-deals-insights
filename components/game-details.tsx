@@ -17,6 +17,7 @@ import { CartesianGrid, LabelList, Line, LineChart, XAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import { getGameImageSrc } from "@/lib/utils";
 
 export default function GameDetails({ game }: { game: ITADGame }) {
   const { data } = useGameDealDetail({ gameId: game.id });
@@ -62,11 +63,6 @@ export default function GameDetails({ game }: { game: ITADGame }) {
   };
 
   const deal = fetchedData?.deals?.[0];
-  const imageSrc =
-    game.assets.boxart ||
-    game.assets.banner600 ||
-    game.assets.banner400 ||
-    "/images/noImage.png";
 
   return (
     <DialogContent className="sm:max-w-xl">
@@ -81,7 +77,7 @@ export default function GameDetails({ game }: { game: ITADGame }) {
         <div className="flex gap-4">
           <div className="relative w-28 sm:w-36 rounded-md">
             <Image
-              src={imageSrc}
+              src={getGameImageSrc(game.assets)}
               alt={`${game.title} cover art`}
               fill
               className="rounded-md object-cover object-top w-full square"

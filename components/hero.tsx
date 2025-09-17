@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import { useHeroGameDeal } from "@/lib/queries/useHeroGameDeal";
 import HeroSkeleton from "./hero-skeleton";
 import { ITADGame } from "@/types/api-responses";
+import { getGameImageSrc } from "@/lib/utils";
 
 export default function HeroSection() {
   const { data, isLoading, isError } = useHeroGameDeal();
@@ -27,7 +28,7 @@ export default function HeroSection() {
   return (
     <div className="w-full aspect-video relative rounded-md overflow-hidden isolate max-h-96">
       <Image
-        src={gameDeal.assets.boxart}
+        src={getGameImageSrc(gameDeal.assets)}
         alt="Deal of the day image"
         fill={true}
         className="object-cover aspect-video -z-10"
