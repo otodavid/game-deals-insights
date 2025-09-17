@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
-import { Pencil, Plus } from "lucide-react";
+import { Bell, Pencil, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 
 export default function PriceAlert() {
@@ -38,16 +38,16 @@ export default function PriceAlert() {
     },
   ];
   return (
-    <div>
-      <div className="flex justify-between">
-        <h3 className="text-xl font-medium">Price Alerts</h3>
+    <Card>
+      <CardHeader className="flex justify-between">
+        <CardTitle className="text-xl font-medium">Price Alerts</CardTitle>
         <Button variant="ghost">
           <Plus />
         </Button>
-      </div>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+      </CardHeader>
+      <CardContent className="grid grid-cols-[repeat(auto-fill,minmax(19rem,1fr))] gap-4">
         {data.map((game) => (
-          <Card key={game.id} className="p-4">
+          <div key={game.id} className="p-4 border rounded-md">
             <div className="grid grid-cols-[6rem_1fr]">
               <div className="relative">
                 <Image
@@ -60,8 +60,9 @@ export default function PriceAlert() {
 
               <div className="ml-4">
                 <CardHeader className="px-0">
-                  <CardTitle className="text-lg font-semibold">
-                    {game.title}
+                  <CardTitle className="font-semibold flex justify-between">
+                    <span>{game.title}</span>
+                    <span>&#36;{game.currentPrice}</span>
                   </CardTitle>
                   <CardDescription className="sr-only">
                     Price alert for {game.title}
@@ -69,26 +70,44 @@ export default function PriceAlert() {
                 </CardHeader>
                 <CardContent className="px-0">
                   <div className="flex justify-between">
-                    <div className="flex flex-col">
-                      <span className="text-sm">Target Price</span>
-                      <span className="font-semibold">
-                        &#36;{game.targetPrice}
-                      </span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm">Current Lowest</span>
-                      <span className="font-semibold">&#36;12.99</span>
+                    <div className="flex gap-1 items-center">
+                      <Bell size={14} />
+                      <span className="text-sm">&#36;{game.targetPrice}</span>
                     </div>
                   </div>
-                  <Button variant={"secondary"} className="mt-2 w-full">
-                    <Pencil size={"1rem"} /> Manage
-                  </Button>
+                  <div className="flex justify-between items-center mt-2 ">
+                    <Button
+                      size={"sm"}
+                      className="text-sm p-4 justify-self-start"
+                    >
+                      Active
+                    </Button>
+
+                    <div className="flex gap-2 justify-end">
+                      <Button
+                        size={"sm"}
+                        variant={"outline"}
+                        className="text-sm p-4"
+                      >
+                        <Pencil />
+                        <span className="sr-only">Edit</span>
+                      </Button>
+                      <Button
+                        size={"sm"}
+                        variant={"outline"}
+                        className="text-sm  p-4"
+                      >
+                        <Trash size={14} />
+                        <span className="sr-only">Delete</span>
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </div>
             </div>
-          </Card>
+          </div>
         ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
