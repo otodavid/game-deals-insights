@@ -18,6 +18,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { Dialog, DialogTrigger } from "./ui/dialog";
+import GameDetails from "./game-details";
+import { ITADGame } from "@/types/api-responses";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,16 +69,21 @@ export const DealsDataTable = <TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="">
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
+                <Dialog key={row.id}>
+                  <DialogTrigger asChild>
+                    <TableRow key={row.id} className="cursor-pointer">
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} className="">
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </DialogTrigger>
+                  <GameDetails game={row.original as ITADGame} />
+                </Dialog>
               ))
             ) : (
               <TableRow>
