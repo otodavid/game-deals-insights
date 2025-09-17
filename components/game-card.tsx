@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { ITADGame } from "@/types/api-responses";
 
-export default function GameCard(game: ITADGame) {
+export default function GameCard({ game }: { game: ITADGame }) {
   return (
     <Card className="p-0 rounded-md overflow-hidden">
       <div className="relative isolate aspect-square">
@@ -27,7 +27,9 @@ export default function GameCard(game: ITADGame) {
           </CardHeader>
           <CardContent className="flex justify-between mt-2 px-0">
             <div className="space-x-2">
-              <Badge className="bg-chart-2 px-2.5 py-1">{game.deal.cut ?? 0}%</Badge>
+              <Badge className="bg-chart-2 px-2.5 py-1">
+                {game.deal.cut ?? 0}%
+              </Badge>
               <span>&#36;{game.deal.price.amount}</span>
             </div>
             <span>{game.deal.shop.name}</span>
