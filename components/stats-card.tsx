@@ -11,8 +11,6 @@ interface StatsCardProps {
 }
 
 export default function StatsCard(stats: StatsCardProps) {
-  const formattedValue =
-    typeof stats.value === "string" ? `${stats.value}%` : stats.value;
   return (
     <Card className="px-4">
       <div>
@@ -23,7 +21,7 @@ export default function StatsCard(stats: StatsCardProps) {
           <CircleArrowOutUpRight size={"1rem"} />
         </CardHeader>
         <CardContent className="px-0">
-          <p className="text-4xl font-bold">{formattedValue}</p>
+          <p className="text-4xl font-bold">{stats.value}</p>
           <p className="text-xs text-muted-foreground capitalize mt-2">
             {stats.description}
           </p>
