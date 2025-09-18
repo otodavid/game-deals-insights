@@ -24,7 +24,8 @@ I think it still needs a lot of work. Asides things like improving code quality,
 - A functional price alert where users can set up a price target and then be able to monitor it (or get a mail/notification when target is met)
 - Idealy, a separate page for paging through data and searched data
 - Giving users the freedom to choose what store they want to look at
-- Visual comparison of prices between stores (some people shop at certain stores) 
+- Visual comparison of prices between stores (some people shop at certain stores)
+- Light/dark mode
 
 ## Running Locally
 - Download or clone the repository
