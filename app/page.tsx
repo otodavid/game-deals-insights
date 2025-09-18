@@ -5,7 +5,7 @@ import PriceAlert from "@/components/price-alerts";
 
 export default function Home() {
   return (
-    <div className="px-3 space-y-8 mt-8">
+    <div className="px-4 md:px-6 xl:px-16 space-y-8 mt-8">
       <div className="@container">
         <div className="grid grid-cols-1 gap-8 @5xl:grid-cols-[1fr_.3fr] md:gap-8 justify-between items-stretch">
           <HeroSection />
