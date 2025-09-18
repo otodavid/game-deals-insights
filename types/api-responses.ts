@@ -42,8 +42,7 @@ export interface ITADPriceHistory {
   m3?: ITADPrice;
 }
 
-export interface ITADDealDetail {
-  shop: ITADShop;
+export interface ITADDealDetail extends ITADDeal {
   expiry: string | null;
   url: string;
 }
