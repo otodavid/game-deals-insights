@@ -17,11 +17,11 @@ export async function apiFetch<T>(
 
   const fetchOptions: RequestInit = { method };
 
-  if (method === "GET") {
-    Object.entries(params).forEach(([k, v]) =>
-      url.searchParams.set(k, String(v))
-    );
-  } else {
+  Object.entries(params).forEach(([k, v]) =>
+    url.searchParams.set(k, String(v))
+  );
+
+  if (method !== "GET") {
     fetchOptions.headers = { "Content-Type": "application/json" };
     fetchOptions.body = JSON.stringify(bodyData);
   }
