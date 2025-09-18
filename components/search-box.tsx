@@ -27,7 +27,6 @@ export default function SearchBox({
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={handleKeyDown}
         className="pl-8 rounded-md w-full"
-        disabled
       />
       <Search
         className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
