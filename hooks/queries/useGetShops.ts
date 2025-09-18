@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "../apiClient";
-import {  ITADShopDetail } from "@/types/api-responses";
+import { apiFetch } from "../../lib/apiClient";
+import { ITADShopDetail } from "@/types/api-responses";
 
 export function useGetShops(params: { country?: string }) {
   return useQuery({

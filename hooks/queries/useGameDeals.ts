@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiFetch } from "../apiClient";
+import { apiFetch } from "../../lib/apiClient";
 import { ITADDealsResponse } from "@/types/api-responses";
 
 export function useGameDeals(params: {

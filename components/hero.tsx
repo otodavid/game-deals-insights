@@ -5,7 +5,7 @@ import React from "react";
 import { Badge } from "./ui/badge";
 import { Flame } from "lucide-react";
 import { Button } from "./ui/button";
-import { useHeroGameDeal } from "@/lib/queries/useHeroGameDeal";
+import { useHeroGameDeal } from "@/hooks/queries/useHeroGameDeal";
 import HeroSkeleton from "./hero-skeleton";
 import { ITADGame } from "@/types/api-responses";
 import { getGameImageSrc } from "@/lib/utils";

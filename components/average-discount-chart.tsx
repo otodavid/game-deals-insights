@@ -15,8 +15,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useGameDeals } from "./queries/useGameDeals";
-import { DEFAULT_DEALS_PARAMS } from "./constants";
+import { useGameDeals } from "../hooks/queries/useGameDeals";
+import { DEFAULT_DEALS_PARAMS } from "../lib/constants";
 import { useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 

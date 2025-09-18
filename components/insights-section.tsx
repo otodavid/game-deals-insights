@@ -1,9 +1,9 @@
 "use client";
 
-import { AverageDiscountChart } from "@/lib/average-discount-chart";
+import { AverageDiscountChart } from "@/components/average-discount-chart";
 import StatsCardList from "./stats-card-list";
 import { TotalDealsChart } from "./total-deals-chart";
-import { useGetShops } from "@/lib/queries/useGetShops";
+import { useGetShops } from "@/hooks/queries/useGetShops";
 
 export default function InsightsSection() {
   const { data, isLoading } = useGetShops({ country: "CA" });

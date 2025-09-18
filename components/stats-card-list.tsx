@@ -3,7 +3,7 @@
 import StatsCardSkeleton from "./stats-card-skeleton";
 import { DEFAULT_DEALS_PARAMS, DEFAULT_SHOPS } from "@/lib/constants";
 import StatsCard from "./stats-card";
-import { useGameDeals } from "@/lib/queries/useGameDeals";
+import { useGameDeals } from "@/hooks/queries/useGameDeals";
 import { ITADGame, ITADShopDetail } from "@/types/api-responses";
 
 export default function StatsCardList({

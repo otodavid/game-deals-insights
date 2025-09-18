@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import type { ITADDealsResponse } from "@/types/api-responses";
-import { useGameDeals } from "@/lib/queries/useGameDeals";
-import { useGameSearch } from "@/lib/queries/useGameSearch";
+import { useGameDeals } from "@/hooks/queries/useGameDeals";
+import { useGameSearch } from "@/hooks/queries/useGameSearch";
 import { DEFAULT_DEALS_PARAMS } from "@/lib/constants";
 import GamesGridView from "./games-grid-view";
 import GamesTableView from "./games-table-view";

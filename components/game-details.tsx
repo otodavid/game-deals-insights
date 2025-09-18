@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { useGameDealDetail } from "@/lib/queries/useGameDealDetail";
+import { useGameDealDetail } from "@/hooks/queries/useGameDealDetail";
 import {
   ChartConfig,
   ChartContainer,
