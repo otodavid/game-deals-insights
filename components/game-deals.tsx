@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import HeroSkeleton from "./hero-skeleton";
 import type { ITADDealsResponse } from "@/types/api-responses";
 import { useGameDeals } from "@/lib/queries/useGameDeals";
 import { useGameSearch } from "@/lib/queries/useGameSearch";
@@ -94,7 +93,7 @@ export default function GameDeals() {
         {!isLoading && games?.list && games.list.length > 0 && (
           <>
             {view === "grid" ? (
-              <GamesGridView games={games} />
+              <GamesGridView games={games.list} />
             ) : (
               <GamesTableView games={games} />
             )}
