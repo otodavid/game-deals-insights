@@ -1,8 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Game Deal Insights
+## Introduction
+This is a dashboard that gives users the insight on game deals from different game stores. It mainly shows the lowest discount prices and the store which has it. For this dashboard, the focus is mainly on 5 major game stores. It uses the IsThereAnyDeal API (2.7.0) to get its data.
 
-## Getting Started
+This is the [figma design](https://www.figma.com/design/sobWKzSBrqHJ7OdMopy86B/Untitled?node-id=0-1&p=f&t=zy5mEsZvrWYA5htf-0) where I started from
 
-First, run the development server:
+
+## What API and why
+- First, when I saw the word "dashboard," I immediately thought of analytics with charts and insights. While the examples given weren’t typical dashboards, I wanted something fun yet still capable of reflecting risk management themes—similar to Agam Capital’s mission of helping companies use capital efficiently while minimizing risk.
+- Second, on a personal note, I’ve always wanted a tool like this but hadn’t looked into whether one existed. This felt like the perfect opportunity.
+  
+## Design Decisions
+- Modal for deal details as opposed to a new page since it's a small dashboard. It also reduces navigation friction.
+- Line chart with labels and tooltips for price history compare at a glance.
+- Stats cards to show important information without overwhelming the user.
+- Cards with game pictures for having a sense of fun and tables for a dashboard look.
+- TanStack Query for caching/re-fetching needs
+- Nextjs for easy routing, built in api routes and image optimization.
+
+## Ideas for future improvements
+I think it still needs a lot of work. Asides things like improving code quality, having tests for components, better error handling and messages, better performance from API calls; in terms of features, these are some:
+- Suggestions when searching for games
+- Having a filter and sort button that works
+- A functional price alert where users can set up a price target and then be able to monitor it (or get a mail/notification when target is met)
+- Idealy, a separate page for paging through data and searched data
+- Giving users the freedom to choose what store they want to look at
+- Visual comparison of prices between stores (some people shop at certain stores) 
+
+## Running Locally
+- Download or clone the repository
+- Install all dependencies
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+- Then, run the development server:
 
 ```bash
 npm run dev
@@ -13,24 +49,3 @@ pnpm dev
 # or
 bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
