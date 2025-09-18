@@ -6,6 +6,7 @@ This is the [figma design](https://www.figma.com/design/sobWKzSBrqHJ7OdMopy86B/U
 
 
 ## What API and why
+I chose the [IsThereAnyDeal API](https://docs.isthereanydeal.com/)
 - First, when I saw the word "dashboard," I immediately thought of analytics with charts and insights. While the examples given weren’t typical dashboards, I wanted something fun yet still capable of reflecting risk management themes—similar to Agam Capital’s mission of helping companies use capital efficiently while minimizing risk.
 - Second, on a personal note, I’ve always wanted a tool like this but hadn’t looked into whether one existed. This felt like the perfect opportunity.
   
